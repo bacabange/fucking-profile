@@ -1,42 +1,86 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+import TwitterIcon from "../public/icons/twitter.svg";
+import LinkedinIcon from "../public/icons/linkedin.svg";
+import GithubIcon from "../public/icons/github.svg";
+import DribbbleIcon from "../public/icons/dribbble.svg";
+import EnvelopeIcon from "../public/icons/envelope.svg";
+import Layout from "../layout/Layout";
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>Dev | Stiven Castillo</title>
-        <meta name="description" content="Mi puta página" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className="w-full">
-        <div className="grid lg:grid-cols-4 gap-0">
-          <div className="col-span-1 bg-white border-r-2 border-indigo-500 h-screen">
-            <div className="flex flex-col justify-center items-center h-full px-20">
-              <div className="w-full">
-                <div className="mb-8">
-                  <Image
-                    src="https://via.placeholder.com/230x60.png"
-                    alt="Logo"
-                    height={60}
-                    width={230}
-                  />
-                </div>
-
-                <ul className="flex flex-col space-y-4">
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">About</a></li>
-                  <li><a href="#">Blog</a></li>
-                </ul>
+    <Layout title="Home">
+      <div className="page-content flex flex-col justify-center items-center">
+        <div className="lg:flex lg:flex-row lg:items-center">
+          <div className="w-64 lg:w-96 m-auto mb-6 lg:mx-8 ">
+            <Image
+              src="https://via.placeholder.com/500x500.png"
+              alt="Profile"
+              className="rounded-full w-full"
+              height={500}
+              width={500}
+            />
+          </div>
+          <div>
+            <h1 className="text-4xl text-center lg:text-left text-black mb-6 lg:mb-4">
+              Stiven Castillo
+            </h1>
+            <p className="text-center text-black lg:text-left text-lg font-normal mb-8">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Pellentesque euismod, urna eu tincidunt consectetur{" "}
+            </p>
+            <div className="flex flex-row justify-around space-x-4 lg:justify-start px-12 lg:px-0">
+              <div className="">
+                <Image
+                  src={TwitterIcon}
+                  alt="Twitter"
+                  height={24}
+                  width={24}
+                ></Image>
+              </div>
+              <div className="">
+                <Image
+                  src={LinkedinIcon}
+                  className="lg:mr-4"
+                  alt="Twitter"
+                  height={24}
+                  width={24}
+                ></Image>
+              </div>
+              <div className="">
+                <Image
+                  src={GithubIcon}
+                  className="lg:mr-4"
+                  alt="Twitter"
+                  height={24}
+                  width={24}
+                ></Image>
+              </div>
+              <div className="">
+                <Image
+                  src={EnvelopeIcon}
+                  className="lg:mr-4"
+                  alt="Twitter"
+                  height={24}
+                  width={24}
+                ></Image>
+              </div>
+              <div className="">
+                <Image
+                  src={DribbbleIcon}
+                  className="lg:mr-4"
+                  alt="Twitter"
+                  height={24}
+                  width={24}
+                ></Image>
               </div>
             </div>
           </div>
-          <div className="col-span-3 bg-white h-screen"></div>
         </div>
-      </main>
-    </div>
+      </div>
+    </Layout>
   );
 };
 
