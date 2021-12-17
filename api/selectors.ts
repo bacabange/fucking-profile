@@ -61,13 +61,14 @@ export const selectAuthor = nonEmpty<PartialAuthor, Author>(
 )
 export const selectAuthors = selectListOf(selectAuthor)
 
-type PartialCategory = PartialEntityWithId & Pick<ICategory, 'title' | 'slug' | 'icon'>
+type PartialCategory = PartialEntityWithId & Pick<ICategory, 'title' | 'slug' | 'icon' | 'color'>
 export const selectCategory = nonEmpty<PartialCategory, Category>(
   (partialCategory) => ({
     id: selectEntityId(partialCategory),
     title: partialCategory.title!,
     slug: partialCategory.slug!,
     icon: partialCategory.icon!,
+    color: partialCategory.color!,
   })
 )
 

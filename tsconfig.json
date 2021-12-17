@@ -17,7 +17,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "baseUrl": ".",
+    "paths": {
+      "@api/*": ["api/*"],
+      "@api": ["api/index.ts"],
+      "@components/*": ["components/*"]
+    }
   },
   "include": [
     "next-env.d.ts",

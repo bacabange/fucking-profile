@@ -5,6 +5,7 @@ fragment CategoryFields on Category {
   slug
   title
   icon
+  color
 }
 
 fragment AuthorFields on Author {

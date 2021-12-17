@@ -10,6 +10,7 @@ type Category = {
   slug: string
   title: string
   icon: string
+  color: string
 }
 
 type Author = {

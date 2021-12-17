@@ -1,26 +1,31 @@
-import type { NextPage } from "next";
+import { getCategoryList, getPostList } from "@api";
+import Filter from "@components/Filter/Filter";
+import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
 import PostItem from "../components/Blog/PostItem";
-import { CodeIcon, TwitterIcon, UserIcon } from "../components/Icon/Icon";
+import { CodeIcon, UserIcon } from "../components/Icon/Icon";
 
 import Layout from "../layout/Layout";
 
-const Home: NextPage = () => {
+type HomeProps = {
+  // posts: Post[],
+  categories: Category[],
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  // const posts = await getPostList({ limit: 10 })
+  const categories = await getCategoryList({ limit: 10 })
+
+  return {
+    props: { categories },
+    revalidate: 5 * 60, // once every five minutes
+  }
+}
+
+const Home = ({categories}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title="Home">
-      <div className="w-full">
-        <ul className="flex flex-row space-x-2 justify-center lg:justify-start">
-          <li>
-            <a href="#" className="flex flex-row items-center bg-teal-500 text-white px-3 py-2 rounded-full ring-offset-2 ring-2 ring-teal-500/50">
-              <CodeIcon width={20} height={14} fillColor="fill-white mr-2" /> Dev
-            </a>
-          </li>
-          <li>
-            <a href="#" className="flex flex-row items-center bg-violet-500 text-white px-3 py-2 rounded-full">
-              <UserIcon width={14} height={14} fillColor="fill-white mr-2" /> Personal
-            </a>
-          </li>
-        </ul>
-      </div>
+      <Filter categories={categories} />
+
       {[...Array(10)].map((_, i) => (
         <PostItem key={i} />
       ))}

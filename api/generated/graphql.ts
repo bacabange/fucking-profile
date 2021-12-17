@@ -1,5 +1,3 @@
-import { gql } from '@apollo/client';
-import * as Apollo from '@apollo/client';
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
 import gql from 'graphql-tag';
@@ -8,7 +6,6 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -312,12 +309,19 @@ export enum IAuthorOrder {
 /** [See type definition](https://app.contentful.com/spaces/sbfcsv4cn0xt/content_types/category) */
 export type ICategory = IEntry & {
   __typename?: 'Category';
+  color?: Maybe<Scalars['String']>;
   contentfulMetadata: IContentfulMetadata;
   icon?: Maybe<Scalars['String']>;
   linkedFrom?: Maybe<ICategoryLinkingCollections>;
   slug?: Maybe<Scalars['String']>;
   sys: ISys;
   title?: Maybe<Scalars['String']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/sbfcsv4cn0xt/content_types/category) */
+export type ICategoryColorArgs = {
+  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -355,6 +359,13 @@ export type ICategoryCollection = {
 export type ICategoryFilter = {
   AND?: InputMaybe<Array<InputMaybe<ICategoryFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ICategoryFilter>>>;
+  color?: InputMaybe<Scalars['String']>;
+  color_contains?: InputMaybe<Scalars['String']>;
+  color_exists?: InputMaybe<Scalars['Boolean']>;
+  color_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  color_not?: InputMaybe<Scalars['String']>;
+  color_not_contains?: InputMaybe<Scalars['String']>;
+  color_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<IContentfulMetadataFilter>;
   icon?: InputMaybe<Scalars['String']>;
   icon_contains?: InputMaybe<Scalars['String']>;
@@ -403,6 +414,8 @@ export type ICategoryLinkingCollectionsPostCollectionArgs = {
 };
 
 export enum ICategoryOrder {
+  ColorAsc = 'color_ASC',
+  ColorDesc = 'color_DESC',
   IconAsc = 'icon_ASC',
   IconDesc = 'icon_DESC',
   SlugAsc = 'slug_ASC',
@@ -1057,6 +1070,13 @@ export type ICfAuthorNestedFilter = {
 export type ICfCategoryNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<ICfCategoryNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ICfCategoryNestedFilter>>>;
+  color?: InputMaybe<Scalars['String']>;
+  color_contains?: InputMaybe<Scalars['String']>;
+  color_exists?: InputMaybe<Scalars['Boolean']>;
+  color_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  color_not?: InputMaybe<Scalars['String']>;
+  color_not_contains?: InputMaybe<Scalars['String']>;
+  color_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   contentfulMetadata?: InputMaybe<IContentfulMetadataFilter>;
   icon?: InputMaybe<Scalars['String']>;
   icon_contains?: InputMaybe<Scalars['String']>;
@@ -1082,11 +1102,11 @@ export type ICfCategoryNestedFilter = {
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ICategoryFieldsFragment = { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } };
+export type ICategoryFieldsFragment = { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } };
 
 export type IAuthorFieldsFragment = { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined };
 
-export type IPostFieldsFragment = { __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined };
+export type IPostFieldsFragment = { __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined };
 
 export type IGetCategoryListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -1095,7 +1115,7 @@ export type IGetCategoryListQueryVariables = Exact<{
 }>;
 
 
-export type IGetCategoryListQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
+export type IGetCategoryListQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
 
 export type IGetPostListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -1104,7 +1124,7 @@ export type IGetPostListQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostListQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
+export type IGetPostListQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
 
 export type IGetAuthorListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -1122,7 +1142,7 @@ export type IGetPostQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
+export type IGetPostQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
 
 export type IGetPostListByCategoryQueryVariables = Exact<{
   category: Scalars['String'];
@@ -1131,7 +1151,7 @@ export type IGetPostListByCategoryQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostListByCategoryQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined, postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
+export type IGetPostListByCategoryQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined, postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
 
 export type IGetCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -1140,7 +1160,7 @@ export type IGetCategoryQueryVariables = Exact<{
 }>;
 
 
-export type IGetCategoryQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
+export type IGetCategoryQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined };
 
 export const AuthorFieldsFragmentDoc = gql`
     fragment AuthorFields on Author {
@@ -1164,308 +1184,7 @@ export const CategoryFieldsFragmentDoc = gql`
   slug
   title
   icon
-}
-    `;
-export const PostFieldsFragmentDoc = gql`
-    fragment PostFields on Post {
-  sys {
-    id
-  }
-  title
-  slug
-  url
-  image {
-    url
-  }
-  summary
-  body
-  date
-  author {
-    ...AuthorFields
-  }
-  category {
-    ...CategoryFields
-  }
-  tags
-}
-    ${AuthorFieldsFragmentDoc}
-${CategoryFieldsFragmentDoc}`;
-export const GetCategoryListDocument = gql`
-    query getCategoryList($limit: Int = 10, $skip: Int = 0, $order: [CategoryOrder] = sys_publishedAt_DESC) {
-  categoryCollection(limit: $limit, skip: $skip, order: $order) {
-    items {
-      ...CategoryFields
-    }
-  }
-}
-    ${CategoryFieldsFragmentDoc}`;
-
-/**
- * __useGetCategoryListQuery__
- *
- * To run a query within a React component, call `useGetCategoryListQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCategoryListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCategoryListQuery({
- *   variables: {
- *      limit: // value for 'limit'
- *      skip: // value for 'skip'
- *      order: // value for 'order'
- *   },
- * });
- */
-export function useGetCategoryListQuery(baseOptions?: Apollo.QueryHookOptions<IGetCategoryListQuery, IGetCategoryListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IGetCategoryListQuery, IGetCategoryListQueryVariables>(GetCategoryListDocument, options);
-      }
-export function useGetCategoryListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetCategoryListQuery, IGetCategoryListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IGetCategoryListQuery, IGetCategoryListQueryVariables>(GetCategoryListDocument, options);
-        }
-export type GetCategoryListQueryHookResult = ReturnType<typeof useGetCategoryListQuery>;
-export type GetCategoryListLazyQueryHookResult = ReturnType<typeof useGetCategoryListLazyQuery>;
-export type GetCategoryListQueryResult = Apollo.QueryResult<IGetCategoryListQuery, IGetCategoryListQueryVariables>;
-export const GetPostListDocument = gql`
-    query getPostList($limit: Int = 10, $skip: Int = 0, $order: [PostOrder] = sys_publishedAt_DESC) {
-  postCollection(limit: $limit, skip: $skip, order: $order) {
-    items {
-      ...PostFields
-    }
-  }
-}
-    ${PostFieldsFragmentDoc}`;
-
-/**
- * __useGetPostListQuery__
- *
- * To run a query within a React component, call `useGetPostListQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPostListQuery({
- *   variables: {
- *      limit: // value for 'limit'
- *      skip: // value for 'skip'
- *      order: // value for 'order'
- *   },
- * });
- */
-export function useGetPostListQuery(baseOptions?: Apollo.QueryHookOptions<IGetPostListQuery, IGetPostListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IGetPostListQuery, IGetPostListQueryVariables>(GetPostListDocument, options);
-      }
-export function useGetPostListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetPostListQuery, IGetPostListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IGetPostListQuery, IGetPostListQueryVariables>(GetPostListDocument, options);
-        }
-export type GetPostListQueryHookResult = ReturnType<typeof useGetPostListQuery>;
-export type GetPostListLazyQueryHookResult = ReturnType<typeof useGetPostListLazyQuery>;
-export type GetPostListQueryResult = Apollo.QueryResult<IGetPostListQuery, IGetPostListQueryVariables>;
-export const GetAuthorListDocument = gql`
-    query getAuthorList($limit: Int = 10, $skip: Int = 0, $order: [AuthorOrder] = sys_publishedAt_DESC) {
-  authorCollection(limit: $limit, skip: $skip, order: $order) {
-    items {
-      ...AuthorFields
-    }
-  }
-}
-    ${AuthorFieldsFragmentDoc}`;
-
-/**
- * __useGetAuthorListQuery__
- *
- * To run a query within a React component, call `useGetAuthorListQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetAuthorListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetAuthorListQuery({
- *   variables: {
- *      limit: // value for 'limit'
- *      skip: // value for 'skip'
- *      order: // value for 'order'
- *   },
- * });
- */
-export function useGetAuthorListQuery(baseOptions?: Apollo.QueryHookOptions<IGetAuthorListQuery, IGetAuthorListQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IGetAuthorListQuery, IGetAuthorListQueryVariables>(GetAuthorListDocument, options);
-      }
-export function useGetAuthorListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetAuthorListQuery, IGetAuthorListQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IGetAuthorListQuery, IGetAuthorListQueryVariables>(GetAuthorListDocument, options);
-        }
-export type GetAuthorListQueryHookResult = ReturnType<typeof useGetAuthorListQuery>;
-export type GetAuthorListLazyQueryHookResult = ReturnType<typeof useGetAuthorListLazyQuery>;
-export type GetAuthorListQueryResult = Apollo.QueryResult<IGetAuthorListQuery, IGetAuthorListQueryVariables>;
-export const GetPostDocument = gql`
-    query getPost($slug: String!, $preview: Boolean = false, $locale: String) {
-  postCollection(
-    where: {slug: $slug}
-    preview: $preview
-    limit: 1
-    locale: $locale
-  ) {
-    items {
-      ...PostFields
-    }
-  }
-}
-    ${PostFieldsFragmentDoc}`;
-
-/**
- * __useGetPostQuery__
- *
- * To run a query within a React component, call `useGetPostQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPostQuery({
- *   variables: {
- *      slug: // value for 'slug'
- *      preview: // value for 'preview'
- *      locale: // value for 'locale'
- *   },
- * });
- */
-export function useGetPostQuery(baseOptions: Apollo.QueryHookOptions<IGetPostQuery, IGetPostQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IGetPostQuery, IGetPostQueryVariables>(GetPostDocument, options);
-      }
-export function useGetPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetPostQuery, IGetPostQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IGetPostQuery, IGetPostQueryVariables>(GetPostDocument, options);
-        }
-export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
-export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
-export type GetPostQueryResult = Apollo.QueryResult<IGetPostQuery, IGetPostQueryVariables>;
-export const GetPostListByCategoryDocument = gql`
-    query getPostListByCategory($category: String!, $locale: String, $limit: Int = 10) {
-  categoryCollection(limit: 1, locale: $locale, where: {slug: $category}) {
-    items {
-      ...CategoryFields
-    }
-  }
-  postCollection(
-    where: {category: {slug: $category}}
-    locale: $locale
-    limit: $limit
-  ) {
-    items {
-      ...PostFields
-    }
-  }
-}
-    ${CategoryFieldsFragmentDoc}
-${PostFieldsFragmentDoc}`;
-
-/**
- * __useGetPostListByCategoryQuery__
- *
- * To run a query within a React component, call `useGetPostListByCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostListByCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetPostListByCategoryQuery({
- *   variables: {
- *      category: // value for 'category'
- *      locale: // value for 'locale'
- *      limit: // value for 'limit'
- *   },
- * });
- */
-export function useGetPostListByCategoryQuery(baseOptions: Apollo.QueryHookOptions<IGetPostListByCategoryQuery, IGetPostListByCategoryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IGetPostListByCategoryQuery, IGetPostListByCategoryQueryVariables>(GetPostListByCategoryDocument, options);
-      }
-export function useGetPostListByCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetPostListByCategoryQuery, IGetPostListByCategoryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IGetPostListByCategoryQuery, IGetPostListByCategoryQueryVariables>(GetPostListByCategoryDocument, options);
-        }
-export type GetPostListByCategoryQueryHookResult = ReturnType<typeof useGetPostListByCategoryQuery>;
-export type GetPostListByCategoryLazyQueryHookResult = ReturnType<typeof useGetPostListByCategoryLazyQuery>;
-export type GetPostListByCategoryQueryResult = Apollo.QueryResult<IGetPostListByCategoryQuery, IGetPostListByCategoryQueryVariables>;
-export const GetCategoryDocument = gql`
-    query getCategory($slug: String!, $preview: Boolean = false, $locale: String) {
-  categoryCollection(
-    where: {slug: $slug}
-    preview: $preview
-    limit: 1
-    locale: $locale
-  ) {
-    items {
-      ...CategoryFields
-    }
-  }
-}
-    ${CategoryFieldsFragmentDoc}`;
-
-/**
- * __useGetCategoryQuery__
- *
- * To run a query within a React component, call `useGetCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCategoryQuery({
- *   variables: {
- *      slug: // value for 'slug'
- *      preview: // value for 'preview'
- *      locale: // value for 'locale'
- *   },
- * });
- */
-export function useGetCategoryQuery(baseOptions: Apollo.QueryHookOptions<IGetCategoryQuery, IGetCategoryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<IGetCategoryQuery, IGetCategoryQueryVariables>(GetCategoryDocument, options);
-      }
-export function useGetCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<IGetCategoryQuery, IGetCategoryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<IGetCategoryQuery, IGetCategoryQueryVariables>(GetCategoryDocument, options);
-        }
-export type GetCategoryQueryHookResult = ReturnType<typeof useGetCategoryQuery>;
-export type GetCategoryLazyQueryHookResult = ReturnType<typeof useGetCategoryLazyQuery>;
-export type GetCategoryQueryResult = Apollo.QueryResult<IGetCategoryQuery, IGetCategoryQueryVariables>;
-export const AuthorFieldsFragmentDoc = gql`
-    fragment AuthorFields on Author {
-  sys {
-    id
-  }
-  photo {
-    url
-    title
-  }
-  fullName
-  handle
-  twitter
-}
-    `;
-export const CategoryFieldsFragmentDoc = gql`
-    fragment CategoryFields on Category {
-  sys {
-    id
-  }
-  slug
-  title
-  icon
+  color
 }
     `;
 export const PostFieldsFragmentDoc = gql`

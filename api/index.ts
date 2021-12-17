@@ -23,8 +23,10 @@ export function getPostList(
 ): Promise<Post[]> {
   return api
     .getPostList({ limit: 10, skip: 0, ...args })
-    .then((responseData) =>
-      selectors.selectPosts(responseData.postCollection)
+    .then((responseData) => {
+      console.log(responseData)
+      return selectors.selectPosts(responseData.postCollection)
+    }
     )
 }
 

@@ -21,4 +21,11 @@ body {
   .image-profile {
     @apply rounded-full object-cover w-full h-full;
   }
+
+  .category-item {
+    @apply flex flex-row items-center text-white px-3 py-2 rounded-full;
+  }
+  .category-item--active {
+    @apply ring-offset-2 ring-2;
+  }
 }
