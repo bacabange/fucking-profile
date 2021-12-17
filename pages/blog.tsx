@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../layout/Layout";
 import Image from "next/image";
+import Link from "next/link";
 
 const Blog = () => {
   return (
@@ -34,9 +35,11 @@ const Blog = () => {
                 </h3>
 
                 <div className="flex flex-row justify-end">
-                  <a href="#" className="text-blue-500">
-                    Read More
-                  </a>
+                  <Link href="/blog/hola-putitos">
+                    <a className="text-blue-500">
+                      Read More
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

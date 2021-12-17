@@ -9,13 +9,16 @@ body {
 @tailwind utilities;
 
 @layer components {
-  .main-container {
-    @apply grid grid-cols-4 grid-rows-menu lg:grid-rows-1 lg:grid-cols-4 gap-0 min-h-screen ;
-  }
-  .content {
-    @apply px-4 row-span-3 col-span-4 lg:row-span-4 lg:col-span-3;
-  }
   .page-content {
-    @apply h-full w-3/4 m-auto;
+    @apply h-full w-10/12 m-auto;
+  }
+  .link {
+    @apply text-xl text-blue-500
+  }
+  .link-navbar {
+    @apply hover:tracking-widest transition-all duration-100
+  }
+  .image-profile {
+    @apply rounded-full object-cover w-full h-full;
   }
 }

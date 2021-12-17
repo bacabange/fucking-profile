@@ -1,6 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 import Navbar from './Navbar'
+import Header from './Header'
+import Footer from './Footer'
 
 type LayoutProps = { title?: string }
 const siteTitle = "Stiven Castillo"
@@ -23,15 +25,14 @@ const Layout: React.FC<LayoutProps> = ({children, title}) => {
           rel="stylesheet"
         />
       </Head>
-      <div className="w-full bg-white">
-        <div className="main-container">
-          <Navbar />
+      <div className="relative w-full min-h-screen bg-slate-50 flex flex-col">
+        <Header />
 
-          <main className="content">
-            {children}
-          </main>
+        <main className="flex flex-col justify-start space-y-6 w-full md:w-10/12 lg:w-1/2 px-4 lg:px-0 mx-auto pb-14">
+          {children}
+        </main>
 
-        </div>
+        <Footer />
       </div>
     </>
   )

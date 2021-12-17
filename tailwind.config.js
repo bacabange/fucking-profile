@@ -1,6 +1,9 @@
 module.exports = {
-  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./layout/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -8,6 +11,7 @@ module.exports = {
       },
       gridTemplateRows: {
         menu: "80px repeat(3, minmax(0, 1fr))",
+        header: "20% 1fr",
       },
       height: {
         "screen-layout": "calc(100vh - 80px)",
@@ -30,9 +34,6 @@ module.exports = {
         "deep-orange-700-accent": "#dd2c00",
       },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [],
 };

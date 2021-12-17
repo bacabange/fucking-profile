@@ -1,0 +1,122 @@
+fragment CategoryFields on Category {
+  sys {
+    id
+  }
+  slug
+  title
+  icon
+}
+
+fragment AuthorFields on Author {
+  sys {
+    id
+  }
+  photo {
+    url
+    title
+  }
+  fullName
+  handle
+  twitter
+}
+
+fragment PostFields on Post {
+  sys {
+    id
+  }
+  title
+  slug
+  url
+  image {
+    url
+  }
+  summary
+  body
+  date
+  author {
+    ...AuthorFields
+  }
+  category {
+    ...CategoryFields
+  }
+  tags
+}
+
+query getCategoryList(
+  $limit: Int = 10
+  $skip: Int = 0
+  $order: [CategoryOrder] = sys_publishedAt_DESC
+) {
+  categoryCollection(limit: $limit, skip: $skip, order: $order) {
+    items {
+      ...CategoryFields
+    }
+  }
+}
+
+query getPostList(
+  $limit: Int = 10
+  $skip: Int = 0
+  $order: [PostOrder] = sys_publishedAt_DESC
+) {
+  postCollection(limit: $limit, skip: $skip, order: $order) {
+    items {
+      ...PostFields
+    }
+  }
+}
+
+query getAuthorList(
+  $limit: Int = 10
+  $skip: Int = 0
+  $order: [AuthorOrder] = sys_publishedAt_DESC
+) {
+  authorCollection(limit: $limit, skip: $skip, order: $order) {
+    items {
+      ...AuthorFields
+    }
+  }
+}
+
+query getPost($slug: String!, $preview: Boolean = false, $locale: String) {
+  postCollection(
+    where: { slug: $slug }
+    preview: $preview
+    limit: 1
+    locale: $locale
+  ) {
+    items {
+      ...PostFields
+    }
+  }
+}
+
+query getPostListByCategory($category: String!, $locale: String, $limit: Int = 10) {
+  categoryCollection(limit: 1, locale: $locale, where: { slug: $category }) {
+    items {
+      ...CategoryFields
+    }
+  }
+  postCollection(
+    where: { category: { slug: $category } }
+    locale: $locale
+    limit: $limit
+  ) {
+    items {
+      ...PostFields
+    }
+  }
+}
+
+query getCategory($slug: String!, $preview: Boolean = false, $locale: String) {
+  categoryCollection(
+    where: { slug: $slug }
+    preview: $preview
+    limit: 1
+    locale: $locale
+  ) {
+    items {
+      ...CategoryFields
+    }
+  }
+}
