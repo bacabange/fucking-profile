@@ -17,15 +17,22 @@ const client = new GraphQLClient(
 const api = getSdk(client)
 export const sdk = api
 
-
+export interface PostResponse {
+  entries: Post[], total: number, skip: number, limit: number
+}
 export function getPostList(
   args?: IGetPostListQueryVariables
-): Promise<Post[]> {
+): Promise<PostResponse> {
   return api
     .getPostList({ limit: 10, skip: 0, ...args })
     .then((responseData) => {
-      console.log(responseData)
-      return selectors.selectPosts(responseData.postCollection)
+      return {
+        // @ts-ignore
+        entries: selectors.selectPosts(responseData.postCollection),
+        total: responseData.postCollection?.total || 0,
+        skip: responseData.postCollection?.skip || 0,
+        limit: responseData.postCollection?.limit || 0,
+      }
     }
     )
 }
@@ -52,6 +59,7 @@ export function getPost(
         throw new Error(`Post with slug: "${slug}" not found`)
       }
 
+      // @ts-ignore
       return selectors.selectPost(responseData.postCollection.items[0])
     })
 }
@@ -66,6 +74,7 @@ export function getPostListByCategory(
         category: selectors.selectCategories(
           responseData.categoryCollection
         )[0],
+        // @ts-ignore
         entries: selectors.selectPosts(responseData.postCollection),
       }
     })
@@ -87,6 +96,7 @@ export function getAuthorList(
   return api
     .getAuthorList({ limit: 10, skip: 0, ...args })
     .then((responseData) =>
+      // @ts-ignore
       selectors.selectAuthors(responseData.authorCollection)
     )
 }

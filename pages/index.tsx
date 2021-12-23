@@ -1,48 +1,40 @@
 import { getCategoryList, getPostList } from "@api";
 import Filter from "@components/Filter/Filter";
-import type { GetStaticProps, InferGetStaticPropsType, NextPage } from "next";
+import Pagination from "@components/Pagination/Pagination";
+import { POSTS_LIMIT } from "config/constants";
+import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import PostItem from "../components/Blog/PostItem";
-import { CodeIcon, UserIcon } from "../components/Icon/Icon";
 
 import Layout from "../layout/Layout";
 
 type HomeProps = {
-  // posts: Post[],
+  posts: Post[],
   categories: Category[],
+  total: number,
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  // const posts = await getPostList({ limit: 10 })
+  const {entries, total} = await getPostList({ limit: POSTS_LIMIT, skip: 0 })
   const categories = await getCategoryList({ limit: 10 })
 
   return {
-    props: { categories },
-    revalidate: 5 * 60, // once every five minutes
+    props: { categories, posts: entries, total },
+    // revalidate: 5 * 60, // once every five minutes
   }
 }
 
-const Home = ({categories}: InferGetStaticPropsType<typeof getStaticProps>) => {
+
+const Home = ({categories, posts, total}: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title="Home">
       <Filter categories={categories} />
 
-      {[...Array(10)].map((_, i) => (
-        <PostItem key={i} />
+      {posts.length && posts.map((post) => (
+        <PostItem post={post} key={post.id} />
       ))}
 
       <div className="py-4">
-        <ul className="flex flex-row justify-between">
-          <li>
-            <a href="#" className="bg-slate-100 border border-slate-200 text-slate-300 px-4 py-2 text-lg rounded-md">
-            &lsaquo;
-            </a>
-          </li>
-          <li>
-            <a href="#" className="bg-white border border-slate-200 text-black px-4 py-2 text-lg rounded-md">
-            &rsaquo;
-            </a>
-          </li>
-        </ul>
+        <Pagination next={total > POSTS_LIMIT ? 2 : null} />
       </div>
     </Layout>
   );

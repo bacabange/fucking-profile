@@ -1124,7 +1124,7 @@ export type IGetPostListQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostListQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
+export type IGetPostListQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', total: number, skip: number, limit: number, items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
 
 export type IGetAuthorListQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
@@ -1142,7 +1142,7 @@ export type IGetPostQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
+export type IGetPostQuery = { __typename?: 'Query', postCollection?: { __typename?: 'PostCollection', total: number, skip: number, limit: number, items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
 
 export type IGetPostListByCategoryQueryVariables = Exact<{
   category: Scalars['String'];
@@ -1151,7 +1151,7 @@ export type IGetPostListByCategoryQueryVariables = Exact<{
 }>;
 
 
-export type IGetPostListByCategoryQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined, postCollection?: { __typename?: 'PostCollection', items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
+export type IGetPostListByCategoryQuery = { __typename?: 'Query', categoryCollection?: { __typename?: 'CategoryCollection', items: Array<{ __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined> } | null | undefined, postCollection?: { __typename?: 'PostCollection', total: number, skip: number, limit: number, items: Array<{ __typename?: 'Post', title?: string | null | undefined, slug?: string | null | undefined, url?: string | null | undefined, summary?: string | null | undefined, body?: string | null | undefined, date?: any | null | undefined, tags?: Array<string | null | undefined> | null | undefined, sys: { __typename?: 'Sys', id: string }, image?: { __typename?: 'Asset', url?: string | null | undefined } | null | undefined, author?: { __typename?: 'Author', fullName?: string | null | undefined, handle?: string | null | undefined, twitter?: string | null | undefined, sys: { __typename?: 'Sys', id: string }, photo?: { __typename?: 'Asset', url?: string | null | undefined, title?: string | null | undefined } | null | undefined } | null | undefined, category?: { __typename?: 'Category', slug?: string | null | undefined, title?: string | null | undefined, icon?: string | null | undefined, color?: string | null | undefined, sys: { __typename?: 'Sys', id: string } } | null | undefined } | null | undefined> } | null | undefined };
 
 export type IGetCategoryQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -1221,8 +1221,11 @@ export const GetCategoryListDocument = gql`
 }
     ${CategoryFieldsFragmentDoc}`;
 export const GetPostListDocument = gql`
-    query getPostList($limit: Int = 10, $skip: Int = 0, $order: [PostOrder] = sys_publishedAt_DESC) {
+    query getPostList($limit: Int = 10, $skip: Int = 0, $order: [PostOrder] = date_DESC) {
   postCollection(limit: $limit, skip: $skip, order: $order) {
+    total
+    skip
+    limit
     items {
       ...PostFields
     }
@@ -1246,6 +1249,9 @@ export const GetPostDocument = gql`
     limit: 1
     locale: $locale
   ) {
+    total
+    skip
+    limit
     items {
       ...PostFields
     }
@@ -1264,6 +1270,9 @@ export const GetPostListByCategoryDocument = gql`
     locale: $locale
     limit: $limit
   ) {
+    total
+    skip
+    limit
     items {
       ...PostFields
     }

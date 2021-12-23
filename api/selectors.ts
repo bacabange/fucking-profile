@@ -37,17 +37,15 @@ export const selectEntityId = ({ sys: { id } }: PartialEntityWithId): string =>
 // Entities selectors
 // ----------------------------------------------------------------
 type PartialImageFields = Pick<IAsset, 'title' | 'url' | 'width' | 'height'>
-export const selectImage = nonEmpty<PartialImageFields, Image>(
-  (partialImage) => ({
-    title: partialImage.title!,
-    url: partialImage.url!,
-    width: partialImage.width!,
-    height: partialImage.height!,
-  })
-)
+export const selectImage = (partialImage: PartialImageFields | undefined) => ({
+  title: partialImage?.title || '',
+  url: partialImage?.url || '',
+  width: partialImage?.width || 0,
+  height: partialImage?.height || 0,
+})
 
 type PartialAuthor = PartialEntityWithId & {
-  photo?: Maybe<PartialImageFields>
+  photo: PartialImageFields
 } & Pick<IAuthor, 'fullName' | 'handle' | 'twitter'>
 
 export const selectAuthor = nonEmpty<PartialAuthor, Author>(
@@ -74,9 +72,9 @@ export const selectCategory = nonEmpty<PartialCategory, Category>(
 
 export const selectCategories = selectListOf(selectCategory)
 
-type PartialPost = Pick<IPost, 'slug' | 'title' | 'body' | 'date' | 'summary' | 'url'> &
-  PartialEntityWithId & {
-    image?: Maybe<PartialImageFields>
+type PartialPost = PartialEntityWithId & Pick<IPost, 'slug' | 'title' | 'summary' | 'date' | 'url' | 'body'> &
+  {
+    image?: PartialImageFields
   } & { category?: Maybe<PartialCategory> } & {
     author?: Maybe<PartialAuthor>
   } & {

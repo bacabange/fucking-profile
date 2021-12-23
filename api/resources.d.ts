@@ -25,8 +25,8 @@ type Post = {
   id: string
   title?: string
   slug?: string
+  image?: Image | undefined
   body?: string
-  image?: Image
   url?: string
   summary?: string
   author: Author

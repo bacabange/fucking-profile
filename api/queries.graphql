@@ -58,9 +58,12 @@ query getCategoryList(
 query getPostList(
   $limit: Int = 10
   $skip: Int = 0
-  $order: [PostOrder] = sys_publishedAt_DESC
+  $order: [PostOrder] = date_DESC
 ) {
   postCollection(limit: $limit, skip: $skip, order: $order) {
+    total
+    skip
+    limit
     items {
       ...PostFields
     }
@@ -86,6 +89,9 @@ query getPost($slug: String!, $preview: Boolean = false, $locale: String) {
     limit: 1
     locale: $locale
   ) {
+    total
+    skip
+    limit
     items {
       ...PostFields
     }
@@ -103,6 +109,9 @@ query getPostListByCategory($category: String!, $locale: String, $limit: Int = 1
     locale: $locale
     limit: $limit
   ) {
+    total
+    skip
+    limit
     items {
       ...PostFields
     }
