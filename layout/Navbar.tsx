@@ -7,22 +7,20 @@ const Navbar = () => {
       <div className="flex flex-row lg:flex-col lg:justify-center lg:items-center h-full px-4 lg:px-32 ">
         <div className="w-full flex flex-row lg:flex-col items-center lg:items-start justify-between">
           <div className="lg:mb-8">
-            <h1 className="text-4xl lowercase font-semibold tracking-wider">Stiven</h1>
+            <h1 className="text-4xl lowercase font-semibold tracking-wider">
+              Stiven
+            </h1>
           </div>
 
           <ul className="flex flex-row lg:flex-col space-x-4 lg:space-x-0 lg:space-y-4">
             <li>
               <Link href="/">
-                <a className="link link-navbar">
-                  Home
-                </a>
+                <a className="link link-navbar">Home</a>
               </Link>
             </li>
             <li>
               <Link href="/blog">
-                <a className="link link-navbar">
-                  Blog
-                </a>
+                <a className="link link-navbar">Blog</a>
               </Link>
             </li>
           </ul>

@@ -1,10 +1,10 @@
-import { getCategoryList, getPostList, PostResponse } from "@api";
+import { getCategoryList, getPostList, getPostListByCategory } from "@api";
 import Filter from "@components/Filter/Filter";
 import Pagination from "@components/Pagination/Pagination";
-import PostItem from "@components/Blog/PostItem";
 import { POSTS_LIMIT } from "config/constants";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
+import PostItem from "components/Blog/PostItem";
 
 import Layout from "layout/Layout";
 
@@ -17,12 +17,17 @@ type HomeProps = {
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({ params }) => {
-  const { page } = params || {};
+  const { page, category } = params || {};
   const pageNumber = parseInt(page as string) || 1;
   const skipMultiplier = pageNumber === 1 ? 0 : pageNumber - 1;
   const skip = skipMultiplier > 0 ? POSTS_LIMIT * skipMultiplier : 0;
 
-  const { entries, total } = await getPostList({ limit: POSTS_LIMIT, skip });
+  const { entries, total } = await getPostListByCategory({
+    category: typeof category === "string" ? category : "",
+    limit: POSTS_LIMIT,
+    skip,
+  });
+
   const totalPages = Math.ceil(total / POSTS_LIMIT);
   const categories = await getCategoryList({ limit: 10 });
 
@@ -36,7 +41,7 @@ export const getStaticPaths = async () => {
   const { total } = await getPostList();
 
   const paths = Array.from({ length: total }, (_, i) => i + 1).map(index => ({
-    params: { page: `${index}` },
+    params: { page: `${index}`, category: "all" },
   }));
 
   return {

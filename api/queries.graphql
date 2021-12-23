@@ -98,8 +98,18 @@ query getPost($slug: String!, $preview: Boolean = false, $locale: String) {
   }
 }
 
-query getPostListByCategory($category: String!, $locale: String, $limit: Int = 10) {
-  categoryCollection(limit: 1, locale: $locale, where: { slug: $category }) {
+query getPostListByCategory(
+  $category: String!
+  $locale: String
+  $limit: Int = 10
+  $skip: Int = 0
+) {
+  categoryCollection(
+    limit: 1
+    locale: $locale
+    skip: $skip
+    where: { slug: $category }
+  ) {
     items {
       ...CategoryFields
     }

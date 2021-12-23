@@ -13,7 +13,7 @@ const Blog = () => {
 
         <h1 className="mt-4 mb-12 font-bold text-4xl">Dev Posts</h1>
         <div className="grid gap-5 lg:grid-cols-2 auto-rows-fr">
-          {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+          {[1, 2, 3, 4, 5, 6, 7].map(i => (
             <div className="block" key={i}>
               <div className="relative w-full h-52 bg-yellow-400 rounded-md">
                 <Image
@@ -36,9 +36,7 @@ const Blog = () => {
 
                 <div className="flex flex-row justify-end">
                   <Link href="/blog/hola-putitos">
-                    <a className="text-blue-500">
-                      Read More
-                    </a>
+                    <a className="text-blue-500">Read More</a>
                   </Link>
                 </div>
               </div>

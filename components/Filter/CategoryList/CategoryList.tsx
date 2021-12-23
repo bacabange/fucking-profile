@@ -1,8 +1,8 @@
-import React from 'react';
-import CategoryItem from './CategoryItem';
+import React from "react";
+import CategoryItem from "./CategoryItem";
 
 interface CategoryListProps {
-  categories: Category[]
+  categories: Category[];
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
@@ -16,7 +16,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
         <CategoryItem key={category.id} category={category} />
       ))}
     </ul>
-  )
-}
+  );
+};
 
-export default CategoryList
+export default CategoryList;

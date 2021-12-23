@@ -1,0 +1,2 @@
+bg-teal-500
+bg-violet-500
