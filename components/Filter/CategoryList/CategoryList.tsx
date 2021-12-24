@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import CategoryItem from "./CategoryItem";
 
@@ -15,6 +16,16 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
       {categories.map(category => (
         <CategoryItem key={category.id} category={category} />
       ))}
+
+      <li className="category-container--last">
+        <Link href={`/page/1`}>
+          <a
+            className={`category-item bg-white text-slate-400 border border-slate-200`}
+          >
+            All
+          </a>
+        </Link>
+      </li>
     </ul>
   );
 };

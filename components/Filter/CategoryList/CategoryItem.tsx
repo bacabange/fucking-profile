@@ -11,7 +11,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ active, category }) => {
   const Icon = FilterIcons[category.icon || "CodeIcon"];
   return (
     <li>
-      <Link href={`${category.slug}/page/1`}>
+      <Link href={`/${category.slug}/page/1`}>
         <a
           className={`category-item bg-${category.color}-500 ${
             active ? `category-item--active ring-${category.color}-500` : ""

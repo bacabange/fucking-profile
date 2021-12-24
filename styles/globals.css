@@ -28,6 +28,9 @@ body {
   .category-item--active {
     @apply ring-offset-2 ring-2;
   }
+  .category-container--last {
+    @apply lg:ml-auto !important;
+  }
 
   .pagination {
     @apply flex flex-row justify-between;

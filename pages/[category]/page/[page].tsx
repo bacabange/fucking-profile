@@ -1,6 +1,7 @@
 import { getCategoryList, getPostList, getPostListByCategory } from "@api";
 import Filter from "@components/Filter/Filter";
 import Pagination from "@components/Pagination/Pagination";
+import LoadingFull from "@components/Loading/LoadingFull";
 import { POSTS_LIMIT } from "config/constants";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
@@ -53,28 +54,32 @@ export const getStaticPaths = async () => {
 const Page = ({
   categories,
   posts,
-  total,
   page,
   totalPages,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <h1>Loading...</h1>;
+    return <LoadingFull />;
   }
 
   return (
     <Layout title="Home">
       <Filter categories={categories} />
 
-      <span>total: {total}</span>
-
-      {posts.length &&
-        posts.map(post => <PostItem post={post} key={post.id} />)}
+      {posts.length ? (
+        posts.map(post => <PostItem post={post} key={post.id} />)
+      ) : (
+        <div className="py-4 rounded-md border border-slate-200 bg-white">
+          <p className="text-center text-slate-400">
+            Sorry, no hay post mi pez.
+          </p>
+        </div>
+      )}
 
       <div className="py-4">
         <Pagination
-          next={page === totalPages ? null : page + 1}
+          next={page === totalPages || totalPages === 0 ? null : page + 1}
           prev={page - 1 <= 0 ? null : page - 1}
         />
       </div>

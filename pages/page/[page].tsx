@@ -1,7 +1,8 @@
-import { getCategoryList, getPostList, PostResponse } from "@api";
+import { getCategoryList, getPostList } from "@api";
 import Filter from "@components/Filter/Filter";
 import Pagination from "@components/Pagination/Pagination";
 import PostItem from "@components/Blog/PostItem";
+import LoadingFull from "@components/Loading/LoadingFull";
 import { POSTS_LIMIT } from "config/constants";
 import type { GetStaticProps, InferGetStaticPropsType } from "next";
 import { useRouter } from "next/router";
@@ -48,21 +49,18 @@ export const getStaticPaths = async () => {
 const Page = ({
   categories,
   posts,
-  total,
   page,
   totalPages,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter();
 
   if (router.isFallback) {
-    return <h1>Loading...</h1>;
+    return <LoadingFull />;
   }
 
   return (
     <Layout title="Home">
       <Filter categories={categories} />
-
-      <span>total: {total}</span>
 
       {posts.length &&
         posts.map(post => <PostItem post={post} key={post.id} />)}
