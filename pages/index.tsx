@@ -1,11 +1,11 @@
-import { getCategoryList, getPostList } from "@api";
-import Filter from "@components/Filter/Filter";
-import Pagination from "@components/Pagination/Pagination";
-import { POSTS_LIMIT } from "config/constants";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import PostItem from "../components/Blog/PostItem";
+import { getCategoryList, getPostList } from '@api'
+import Filter from '@components/Filter/Filter'
+import Pagination from '@components/Pagination/Pagination'
+import { POSTS_LIMIT } from 'config/constants'
+import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import PostItem from '../components/Blog/PostItem'
 
-import Layout from "../layout/Layout";
+import Layout from '../layout/Layout'
 
 type HomeProps = {
   posts: Post[];
@@ -14,19 +14,19 @@ type HomeProps = {
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const { entries, total } = await getPostList({ limit: POSTS_LIMIT, skip: 0 });
-  const categories = await getCategoryList({ limit: POSTS_LIMIT });
+  const { entries, total } = await getPostList({ limit: POSTS_LIMIT, skip: 0 })
+  const categories = await getCategoryList({ limit: POSTS_LIMIT })
 
   return {
-    props: { categories, posts: entries, total },
+    props: { categories, posts: entries, total }
     // revalidate: 5 * 60, // once every five minutes
-  };
-};
+  }
+}
 
 const Home = ({
   categories,
   posts,
-  total,
+  total
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
     <Layout title="Home">
@@ -39,7 +39,7 @@ const Home = ({
         <Pagination next={total > POSTS_LIMIT ? 2 : null} />
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

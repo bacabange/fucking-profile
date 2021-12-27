@@ -1,19 +1,31 @@
-import React from "react";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  TwitterIcon,
-  LinkedinIcon,
-  GithubIcon,
-  DribbbleIcon,
-  EnvelopeIcon,
-} from "../components/Icon/Icon";
+import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import SocialList from '@components/SocialList/SocialList'
 
-const Header = () => {
+const Header: React.FC = () => {
+  const [hide, setHide] = useState<boolean>(false)
+
+  const listenToScroll = () => {
+    const heightToHideFrom = 50
+    const winScroll = document.body.scrollTop ||
+      document.documentElement.scrollTop
+
+    if (winScroll > heightToHideFrom) {
+      !hide && setHide(true)
+    } else {
+      setHide(false)
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', listenToScroll)
+    // return () =>
+    //   window.removeEventListener('scroll', listenToScroll)
+  }, [])
+
   return (
-    <header className="flex flex-col justify-center items-center bg-white sticky mb-10 border border-slate-100 w-full p-8 shadow-lg shadow-blue-200/50">
-      <div className="w-28 m-auto">
+    <header className={`header top-0 z-10 ease-out transition-all duration-500 ${hide && 'p-4'}`}>
+      <div className={`w-28 m-auto ${hide && 'hidden'}`}>
         <Image
           src="/me.jpeg"
           alt="Profile"
@@ -23,23 +35,18 @@ const Header = () => {
         />
       </div>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl text-center font-bold tracking-wider text-blue-500 mb-2">
+        <h1 className="text-2xl text-center font-bold tracking-wider text-blue-500 mb-2 hover:animate-esconder">
           Stiven Castillo
         </h1>
-        <p className="text-center text-md font-light text-slate-400 mb-2 w-full lg:w-3/5">
+        <p className={`text-center text-md font-light text-slate-400 mb-2 w-full lg:w-3/5 ${hide && 'hidden'}`}>
           Frontend and Mobile Developer based in Colombia and happy to learn
-          about UI/UX and tattoo illustration.{" "}
+          about UI/UX and tattoo illustration.{' '}
         </p>
-        <div className="flex flex-row justify-around space-x-3 lg:justify-start">
-          <TwitterIcon width={20} height={20} fillColor="fill-slate-400" />
-          <LinkedinIcon width={20} height={20} fillColor="fill-slate-400" />
-          <GithubIcon width={20} height={20} fillColor="fill-slate-400" />
-          <DribbbleIcon width={20} height={20} fillColor="fill-slate-400" />
-          <EnvelopeIcon width={20} height={20} fillColor="fill-slate-400" />
-        </div>
+
+        <SocialList hide={hide} />
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

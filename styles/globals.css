@@ -12,6 +12,9 @@ body {
   .page-content {
     @apply h-full w-10/12 m-auto;
   }
+  .header {
+    @apply flex flex-col justify-center items-center bg-white sticky mb-10 border border-slate-100 w-full p-8 shadow-lg shadow-blue-200/50;
+  }
   .link {
     @apply text-xl text-blue-500
   }
