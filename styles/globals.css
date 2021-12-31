@@ -47,4 +47,8 @@ body {
   .pagination-item--active {
     @apply bg-white border border-slate-200 text-black;
   }
+
+  .link {
+    @apply after:absolute after:inset-0 text-blue-500 hover:underline flex flex-row items-center text-base;
+  }
 }

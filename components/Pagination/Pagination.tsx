@@ -1,5 +1,5 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link'
+import React from 'react'
 
 interface PaginationProps {
   next?: number | null;
@@ -8,7 +8,7 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({
   next = null,
-  prev = null,
+  prev = null
 }) => {
   return (
     <ul className="pagination">
@@ -16,7 +16,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <Link href={`/page/${prev}`}>
           <a
             className={`pagination-item ${
-              prev ? "pagination-item--active" : "pagination-item--inactive"
+              prev ? 'pagination-item--active' : 'pagination-item--inactive'
             }`}
           >
             &lsaquo;
@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({
         <Link href={`/page/${next}`}>
           <a
             className={`pagination-item ${
-              next ? "pagination-item--active" : "pagination-item--inactive"
+              next ? 'pagination-item--active' : 'pagination-item--inactive'
             }`}
           >
             &rsaquo;
@@ -35,7 +35,7 @@ const Pagination: React.FC<PaginationProps> = ({
         </Link>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

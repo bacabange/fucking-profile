@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint",
     "test": "yarn type-check",
@@ -13,7 +14,8 @@
     "prettier-format": "prettier --config .prettierrc './**/*.{ts,tsx}' --write"
   },
   "dependencies": {
-    "@contentful/rich-text-html-renderer": "^15.10.0",
+    "@contentful/rich-text-html-renderer": "^15.11.0",
+    "@contentful/rich-text-react-renderer": "^15.11.0",
     "contentful": "^9.1.5",
     "date-fns": "^2.27.0",
     "graphql": "^16.1.0",
@@ -23,6 +25,7 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@contentful/rich-text-types": "^15.11.0",
     "@graphql-codegen/cli": "2.3.0",
     "@graphql-codegen/introspection": "2.1.0",
     "@graphql-codegen/typescript": "2.4.1",

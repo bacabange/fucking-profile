@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import Image from 'next/image'
 import SocialList from '@components/SocialList/SocialList'
+import Image from 'next/image'
+import Link from 'next/link'
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  type?: 'single' | 'full'
+}
+
+const Header: React.FC<HeaderProps> = ({ type = 'full' }) => {
   const [hide, setHide] = useState<boolean>(false)
 
   const listenToScroll = () => {
@@ -24,29 +29,32 @@ const Header: React.FC = () => {
   }, [])
 
   return (
-    <header className={`header top-0 z-10 ease-out transition-all duration-500 ${hide && 'p-4'}`}>
-      <div className={`w-28 m-auto ${hide && 'hidden'}`}>
+    <header className={`header top-0 z-10 ease-out transition-all duration-300 ${(hide || type === 'single') && 'p-4'}`}>
+      <div className={`w-28 m-auto ${(hide || type === 'single') && 'hidden'}`}>
         <Image
           src="/me.jpeg"
           alt="Profile"
           className="image-profile"
-          height={150}
-          width={150}
+          width={100}
+          height={100}
+          layout='responsive'
         />
       </div>
       <div className="flex flex-col justify-center items-center">
-        <h1 className="text-2xl text-center font-bold tracking-wider text-blue-500 mb-2 hover:animate-esconder">
-          Stiven Castillo
-        </h1>
-        <p className={`text-center text-md font-light text-slate-400 mb-2 w-full lg:w-3/5 ${hide && 'hidden'}`}>
+        <Link href="/">
+          <h1 className="text-2xl text-center font-bold tracking-wider text-blue-500 mb-2 cursor-pointer">
+            Stiven Castillo
+          </h1>
+        </Link>
+        <p className={`text-center text-md font-light text-slate-400 mb-2 w-full lg:w-3/5 ${(hide || type === 'single') && 'hidden'}`}>
           Frontend and Mobile Developer based in Colombia and happy to learn
           about UI/UX and tattoo illustration.{' '}
         </p>
 
-        <SocialList hide={hide} />
+        <SocialList hide={hide || type === 'single'} />
       </div>
     </header>
   )
 }
 
-export default Header
+export default React.memo(Header)

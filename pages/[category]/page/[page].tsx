@@ -1,13 +1,13 @@
-import { getCategoryList, getPostList, getPostListByCategory } from "@api";
-import Filter from "@components/Filter/Filter";
-import Pagination from "@components/Pagination/Pagination";
-import LoadingFull from "@components/Loading/LoadingFull";
-import { POSTS_LIMIT } from "config/constants";
-import type { GetStaticProps, InferGetStaticPropsType } from "next";
-import { useRouter } from "next/router";
-import PostItem from "components/Blog/PostItem";
+import { getCategoryList, getPostList, getPostListByCategory } from '@api'
+import Filter from '@components/Filter/Filter'
+import Pagination from '@components/Pagination/Pagination'
+import LoadingFull from '@components/Loading/LoadingFull'
+import { POSTS_LIMIT } from 'config/constants'
+import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useRouter } from 'next/router'
+import PostItem from 'components/Blog/PostItem'
 
-import Layout from "layout/Layout";
+import Layout from 'layout/Layout'
 
 type HomeProps = {
   posts: Post[];
@@ -15,67 +15,79 @@ type HomeProps = {
   total: number;
   page: number;
   totalPages: number;
+  category: string;
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({ params }) => {
-  const { page, category } = params || {};
-  const pageNumber = parseInt(page as string) || 1;
-  const skipMultiplier = pageNumber === 1 ? 0 : pageNumber - 1;
-  const skip = skipMultiplier > 0 ? POSTS_LIMIT * skipMultiplier : 0;
+  const { page, category } = params || {}
+  const pageNumber = parseInt(page as string) || 1
+  const skipMultiplier = pageNumber === 1 ? 0 : pageNumber - 1
+  const skip = skipMultiplier > 0 ? POSTS_LIMIT * skipMultiplier : 0
+  const categorySlug = category as string
 
   const { entries, total } = await getPostListByCategory({
-    category: typeof category === "string" ? category : "",
+    category: categorySlug,
     limit: POSTS_LIMIT,
-    skip,
-  });
+    skip
+  })
 
-  const totalPages = Math.ceil(total / POSTS_LIMIT);
-  const categories = await getCategoryList({ limit: 10 });
+  const totalPages = Math.ceil(total / POSTS_LIMIT)
+  const categories = await getCategoryList({ limit: 10 })
 
   return {
-    props: { categories, posts: entries, total, page: pageNumber, totalPages },
+    props: {
+      categories,
+      posts: entries,
+      total,
+      page: pageNumber,
+      totalPages,
+      category: categorySlug
+    }
     // revalidate: 5 * 60, // once every five minutes
-  };
-};
+  }
+}
 
 export const getStaticPaths = async () => {
-  const { total } = await getPostList();
+  const { total } = await getPostList()
 
   const paths = Array.from({ length: total }, (_, i) => i + 1).map(index => ({
-    params: { page: `${index}`, category: "all" },
-  }));
+    params: { page: `${index}`, category: 'all' }
+  }))
 
   return {
     fallback: true,
-    paths,
-  };
-};
+    paths
+  }
+}
 
 const Page = ({
   categories,
   posts,
   page,
   totalPages,
+  category
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter();
+  const router = useRouter()
 
   if (router.isFallback) {
-    return <LoadingFull />;
+    return <LoadingFull />
   }
 
   return (
-    <Layout title="Home">
+    <Layout title={category}>
       <Filter categories={categories} />
 
-      {posts.length ? (
-        posts.map(post => <PostItem post={post} key={post.id} />)
-      ) : (
-        <div className="py-4 rounded-md border border-slate-200 bg-white">
-          <p className="text-center text-slate-400">
-            Sorry, no hay post mi pez.
-          </p>
-        </div>
-      )}
+      {posts.length
+        ? (
+            posts.map(post => <PostItem post={post} key={post.id} />)
+          )
+        : (
+          <div className="py-4 rounded-md border border-slate-200 bg-white">
+            <p className="text-center text-slate-400">
+              Sorry, no hay post mi pez.
+            </p>
+          </div>
+          )}
 
       <div className="py-4">
         <Pagination
@@ -84,7 +96,7 @@ const Page = ({
         />
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Page;
+export default Page

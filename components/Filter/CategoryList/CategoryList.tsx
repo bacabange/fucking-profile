@@ -1,6 +1,6 @@
-import Link from "next/link";
-import React from "react";
-import CategoryItem from "./CategoryItem";
+import Link from 'next/link'
+import React from 'react'
+import CategoryItem from './CategoryItem'
 
 interface CategoryListProps {
   categories: Category[];
@@ -8,7 +8,7 @@ interface CategoryListProps {
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
   if (!categories.length) {
-    return null;
+    return null
   }
 
   return (
@@ -18,16 +18,16 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
       ))}
 
       <li className="category-container--last">
-        <Link href={`/page/1`}>
+        <Link href={'/page/1'}>
           <a
-            className={`category-item bg-white text-slate-400 border border-slate-200`}
+            className={'category-item bg-white text-slate-400 border border-slate-200'}
           >
             All
           </a>
         </Link>
       </li>
     </ul>
-  );
-};
+  )
+}
 
-export default CategoryList;
+export default CategoryList

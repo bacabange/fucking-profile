@@ -21,12 +21,14 @@ type Author = {
   twitter: string;
 };
 
+type RichText = Json
+
 type Post = {
   id: string;
   title?: string;
   slug?: string;
   image?: Image | undefined;
-  body?: string;
+  body?: RichText | null;
   url?: string;
   summary?: string;
   author: Author;

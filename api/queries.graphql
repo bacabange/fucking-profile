@@ -30,9 +30,14 @@ fragment PostFields on Post {
   url
   image {
     url
+    title
+    width
+    height
   }
   summary
-  body
+  body {
+    json
+  }
   date
   author {
     ...AuthorFields
@@ -64,6 +69,16 @@ query getPostList(
     total
     skip
     limit
+    items {
+      ...PostFields
+    }
+  }
+}
+
+query getOwnPostList(
+  $order: [PostOrder] = date_DESC
+) {
+  postCollection(order: $order, where: { url_exists: false }) {
     items {
       ...PostFields
     }

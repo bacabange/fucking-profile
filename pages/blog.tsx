@@ -1,7 +1,7 @@
-import React from "react";
-import Layout from "../layout/Layout";
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react'
+import Layout from '../layout/Layout'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const Blog = () => {
   return (
@@ -45,7 +45,7 @@ const Blog = () => {
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Blog;
+export default Blog
