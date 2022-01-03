@@ -4,7 +4,7 @@ import CategoryItem from './CategoryItem'
 
 interface CategoryListProps {
   categories: Category[];
-  categoryActive: string;
+  categoryActive?: string | null;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories, categoryActive }) => {

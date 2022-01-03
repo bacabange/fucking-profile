@@ -3,7 +3,7 @@ import CategoryList from './CategoryList/CategoryList'
 
 interface FilterProps {
   categories: Category[];
-  categoryActive: string;
+  categoryActive?: string | null;
 }
 const Filter: React.FC<FilterProps> = ({ categories, categoryActive }) => {
   return (
