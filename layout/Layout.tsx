@@ -13,6 +13,7 @@ const Layout: React.FC<LayoutProps> = ({ children, title, header }) => {
         <title>{!title ? siteTitle : `${title} | ${siteTitle}`}</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="Stiven Castillo, Developer and Designer" />
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
         <noscript id="mui-insertion-point" />
       </Head>

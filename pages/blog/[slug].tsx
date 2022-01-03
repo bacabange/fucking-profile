@@ -3,6 +3,7 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Layout from '../../layout/Layout'
 import { getOwnPostList, getPost } from '@api'
 import { RichText } from '@components/Blog/RichText'
+import Head from 'next/head'
 
 type SinglePostProps = {
   post: Post | null;
@@ -56,8 +57,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const SinglePost = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
-    <>
       <Layout header='single' title={post?.title}>
+        <Head>
+          <meta name="description" content={post?.summary} />
+          <meta name='keywords' content={post?.tags?.join(',')}/>
+          <meta name="og:description" content={post?.summary} />
+          <meta name="og:title" content={post?.title} />
+          <meta name="og:type" content="article" />
+          <meta name="og:url" content={`https://stiven.dev/blog/${post?.slug}`} />
+          <meta name="og:image" content={post?.image?.url} />
+          <meta name="og:image:secure_url" content={post?.image?.url} />
+          <meta name="og:image:alt" content={post?.title} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={post?.title} />
+          <meta name="twitter:description" content={post?.summary} />
+          <meta name="twitter:image" content={post?.image?.url} />
+          <meta name="twitter:image:alt" content={post?.title} />
+          <meta name="author" content={post?.author?.fullName} />
+        </Head>
+
         {post?.image &&
           <div className='mb-8 flex flex-col justify-center items-center'>
             <img src={post?.image?.url} alt={post?.image?.title} className='object-cover h-96 w-full' />
@@ -76,7 +94,6 @@ const SinglePost = ({ post }: InferGetStaticPropsType<typeof getStaticProps>) =>
           )}
         </div>
       </Layout>
-    </>
   )
 }
 
