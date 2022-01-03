@@ -4,9 +4,10 @@ import CategoryItem from './CategoryItem'
 
 interface CategoryListProps {
   categories: Category[];
+  categoryActive: string;
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
+const CategoryList: React.FC<CategoryListProps> = ({ categories, categoryActive }) => {
   if (!categories.length) {
     return null
   }
@@ -14,7 +15,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
   return (
     <ul className="flex flex-row space-x-2 justify-center lg:justify-start">
       {categories.map(category => (
-        <CategoryItem key={category.id} category={category} />
+        <CategoryItem key={category.id} category={category} active={categoryActive === category.slug} />
       ))}
 
       <li className="category-container--last">

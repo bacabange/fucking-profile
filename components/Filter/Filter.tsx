@@ -3,11 +3,12 @@ import CategoryList from './CategoryList/CategoryList'
 
 interface FilterProps {
   categories: Category[];
+  categoryActive: string;
 }
-const Filter: React.FC<FilterProps> = ({ categories }) => {
+const Filter: React.FC<FilterProps> = ({ categories, categoryActive }) => {
   return (
     <div className="w-full">
-      <CategoryList categories={categories} />
+      <CategoryList categories={categories} categoryActive={categoryActive} />
     </div>
   )
 }

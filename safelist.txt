@@ -1,2 +1,4 @@
 bg-teal-500
 bg-violet-500
+ring-teal-500
+ring-violet-500

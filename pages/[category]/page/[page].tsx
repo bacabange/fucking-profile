@@ -75,7 +75,7 @@ const Page = ({
 
   return (
     <Layout title={category}>
-      <Filter categories={categories} />
+      <Filter categories={categories} categoryActive={category} />
 
       {posts.length
         ? (
